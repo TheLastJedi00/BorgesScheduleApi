@@ -6,21 +6,17 @@ import com.borges.Scheduler.repository.ScheduleRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
-@RequestMapping("/agenda")
+@RequestMapping("/agendamento")
 public class ScheduleController {
-
-    @Autowired
-    private ScheduleRepository repository;
 
     @PostMapping
     @Transactional
-    public void addSchedule(@RequestBody @Valid SchedulingData data){
-        //save Object with parameter "data" in a variable
-        var schedule = new Schedule(data);
-        //Save Object in a repository
-        repository.save(schedule);
+    public void postSchedule(@RequestBody @Valid SchedulingData data){
+        System.out.println(data);
     }
 }

@@ -1,12 +1,13 @@
 package com.borges.Scheduler.dto.schedule;
 
-import com.borges.Scheduler.model.ServiceList;
 import java.time.LocalDateTime;
 
 public record SchedulingData(
+        int day,
+        int hour,
+        int month,
         String name,
-        LocalDateTime hour,
-        LocalDateTime scheduleDate,
-        ServiceList serviceList,
-        String phone) {
+        String phone,
+        String service,
+        int serviceCode) {
 }
