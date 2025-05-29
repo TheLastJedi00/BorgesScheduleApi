@@ -1,39 +1,40 @@
 package com.borges.Scheduler.model.schedule;
 
 import com.borges.Scheduler.dto.schedule.SchedulingData;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
+@Entity(name = "Agendamentos")
+@Table(name = "schedule")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    @NotNull
-    private int day;
-    @NotNull
-    private int hour;
-    @NotNull
-    private int month;
-    @NotNull
+    private Long id;
+    @Column(name = "agendamento")
+    private LocalDateTime date;
+    @Column(name = "nome")
     private String name;
-    @NotNull
+    @Column(name = "telefone")
     private String phone;
-    @NotNull
+    @Column(name = "servico")
     private String service;
-    @NotNull
+    @Column(name = "service_code")
     private int serviceCode;
 
-    public Schedule(int day, int hour, int month, String name, String phone, String service, int serviceCode) {
-        this.day = day;
-        this.hour = hour;
-        this.month = month;
-        this.name = name;
-        this.phone = phone;
-        this.service = service;
-        this.serviceCode = serviceCode;
+    public Schedule(SchedulingData data) {
+        this.date = data.date();
+        this.name = data.name();
+        this.phone = data.phone();
+        this.service = data.service();
+        this.serviceCode = data.serviceCode();
     }
 }

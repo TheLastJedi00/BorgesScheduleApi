@@ -1,7 +1,6 @@
 create table schedule (
     id bigint not null auto_increment,
-    data not null,
-    hora not null,
+    agendamento datetime not null,
     nome varchar(100) not null,
     telefone varchar(20) not null,
     servico varchar(100) not null,

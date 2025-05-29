@@ -1,0 +1,1 @@
+ALTER TABLE schedule CHANGE serviceCode service_code VARCHAR(10) NOT NULL;

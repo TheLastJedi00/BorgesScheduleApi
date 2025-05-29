@@ -1,5 +1,6 @@
 package com.borges.Scheduler.controller;
 
+import com.borges.Scheduler.dto.schedule.ScheduleDetail;
 import com.borges.Scheduler.dto.schedule.SchedulingData;
 import com.borges.Scheduler.model.schedule.Schedule;
 import com.borges.Scheduler.repository.ScheduleRepository;
@@ -8,15 +9,26 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/agendamento")
 public class ScheduleController {
 
+    @Autowired
+    private ScheduleRepository repository;
+
     @PostMapping
     @Transactional
-    public void postSchedule(@RequestBody @Valid SchedulingData data){
-        System.out.println(data);
+    public ResponseEntity postSchedule(@RequestBody @Valid SchedulingData data) {
+        var scheduleObject = new Schedule(data);
+        repository.save(scheduleObject);
+        var uri = ServletUriComponentsBuilder //Build a component
+                .fromCurrentRequest() //Builded component from current request
+                .path("/{id}") //add a segment in URL
+                .buildAndExpand(scheduleObject.getId()) //Change path by ID value
+                .toUri(); //convert component in a object URI
+        return ResponseEntity.created(uri).body(new ScheduleDetail(scheduleObject));
     }
 }
