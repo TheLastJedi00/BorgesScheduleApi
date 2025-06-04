@@ -2,11 +2,14 @@ package com.borges.Scheduler.model.schedule;
 
 import com.borges.Scheduler.dto.schedule.SchedulingData;
 
+import com.borges.Scheduler.services.ServiceFeatures;
+import com.borges.Scheduler.services.WorkingDays;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Entity(name = "Agendamentos")
@@ -21,6 +24,11 @@ public class Schedule {
     private Long id;
     @Column(name = "agendamento")
     private LocalDateTime date;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "day_of_week")
+    private WorkingDays dayOfWeek;
+    @Column(name = "fim_de_agendamento")
+    private LocalDateTime endOfService;
     @Column(name = "nome")
     private String name;
     @Column(name = "telefone")
@@ -32,6 +40,8 @@ public class Schedule {
 
     public Schedule(SchedulingData data) {
         this.date = data.date();
+        this.dayOfWeek = data.dayOfWeek();
+        this.endOfService = ServiceFeatures.calculateEndOfService(data.serviceCode(), data.date());
         this.name = data.name();
         this.phone = data.phone();
         this.service = data.service();

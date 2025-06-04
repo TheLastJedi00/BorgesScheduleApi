@@ -1,6 +1,8 @@
 package com.borges.Scheduler.dto.schedule;
 
 import com.borges.Scheduler.model.schedule.Schedule;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 public record ScheduleDetail(
@@ -8,7 +10,8 @@ public record ScheduleDetail(
         LocalDateTime date,
         String name,
         String phone,
-        String service) {
+        String service,
+        int serviceCode) {
 
     public ScheduleDetail(Schedule schedule) {
         this(
@@ -16,7 +19,8 @@ public record ScheduleDetail(
                 schedule.getDate(),
                 schedule.getName(),
                 schedule.getPhone(),
-                schedule.getService()
+                schedule.getService(),
+                schedule.getServiceCode()
         );
     }
 }

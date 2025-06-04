@@ -1,0 +1,1 @@
+alter table schedule add column day_of_week varchar(10) not null;
