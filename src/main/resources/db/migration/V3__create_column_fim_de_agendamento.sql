@@ -1,1 +1,0 @@
-alter table schedule add column fim_de_agendamento datetime not null;
