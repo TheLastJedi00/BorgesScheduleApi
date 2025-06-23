@@ -35,6 +35,7 @@ Scheduler Controller (/api/schedules)
 | POST | / | Cria um novo agendamento. |
 | GET | / | Lista os horários disponíveis para um dia. |
 | DELETE | /{id} | Cancela um agendamento. |
+|---|---|---|
 Exemplo de corpo para POST /:
 {
   "Date": "2024-10-28T10:00:00",
