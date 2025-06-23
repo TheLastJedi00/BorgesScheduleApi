@@ -10,9 +10,9 @@ O sistema conta com uma lógica de negócios robusta para validar horários, evi
 🛠️ Tecnologias Utilizadas
  * Linguagem: Java 17+
  * Framework: Spring Boot 3
- * Banco de Dados: (Ex: PostgreSQL, MySQL, H2)
+ * Banco de Dados: MySQL
  * Build Tool: Maven
- * Segurança: (Ex: Spring Security, JWT)
+ * Segurança: Spring Security e JWT
 🏛️ Arquitetura
 A API está estruturada em controladores que separam as responsabilidades e um serviço que encapsula as regras de negócio complexas.
  * AdminController.java: Responsável por todos os endpoints relacionados à administração do sistema. As funcionalidades aqui presentes são destinadas ao dono do negócio.
