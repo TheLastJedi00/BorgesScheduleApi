@@ -24,10 +24,6 @@ A API está estruturada em controladores que separam as responsabilidades e um s
    * Processar e preparar os dados antes de salvá-los no banco de dados.
 🚀 Endpoints da API
 A seguir, uma descrição dos principais endpoints disponíveis.
-Admin Controller (/api/admin)
-| Método | Endpoint | Descrição |
-|---|---|---|
-| GET | /agendamentos | Lista todos os agendamentos do dia/mês. |
 
 Scheduler Controller (/api/schedules)
 | Método | Endpoint | Descrição |
@@ -49,6 +45,7 @@ Exemplo de corpo para POST /:
 }
 
 Exemplo de resposta para GET / (horários disponíveis):
+
 [
     "2024-10-28T09:00:00",
     "2024-10-28T11:00:00",
@@ -60,6 +57,7 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas em s
  * JDK 17 ou superior
  * Maven
  * Um cliente de API, como Postman ou Insomnia.
+
 ▶️ Como Executar
  * Clone o repositório:
    git clone https://github.com/TheLastJedi00/BorgesScheduleApi
