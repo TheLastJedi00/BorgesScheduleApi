@@ -38,6 +38,7 @@ Scheduler Controller (/api/schedules)
 |---|---|---|
 
 Exemplo de corpo para POST /:
+
 {
   "Date": "2024-10-28T10:00:00",
   "WeekDay": "SEGUNDA",
