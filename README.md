@@ -27,29 +27,22 @@ A seguir, uma descrição dos principais endpoints disponíveis.
 Admin Controller (/api/admin)
 | Método | Endpoint | Descrição |
 |---|---|---|
-| GET | /dashboard | Retorna dados para o painel admin. |
-| POST | /servicos | Cria um novo tipo de serviço. |
-| PUT | /servicos/{id} | Atualiza um serviço existente. |
 | GET | /agendamentos | Lista todos os agendamentos do dia/mês. |
-Exemplo de corpo para POST /servicos:
-{
-  "nome": "Corte de Cabelo",
-  "duracaoEmMinutos": 45,
-  "valor": 50.00
-}
 
 Scheduler Controller (/api/schedules)
 | Método | Endpoint | Descrição |
 |---|---|---|
 | POST | / | Cria um novo agendamento. |
 | GET | / | Lista os horários disponíveis para um dia. |
-| GET | /{id} | Busca os detalhes de um agendamento específico. |
 | DELETE | /{id} | Cancela um agendamento. |
 Exemplo de corpo para POST /:
 {
-  "idCliente": "uuid-do-cliente-123",
-  "idServico": "uuid-do-servico-456",
-  "dataHora": "2024-10-28T10:00:00"
+  "Date": "2024-10-28T10:00:00",
+  "WeekDay": "SEGUNDA",
+  "Name": "Nome Cliente",
+  "Phone": "11899990000",
+  "Service": "Tipo de Serviço",
+  "ServiceCode": "99"
 }
 
 Exemplo de resposta para GET / (horários disponíveis):
@@ -66,7 +59,7 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas em s
  * Um cliente de API, como Postman ou Insomnia.
 ▶️ Como Executar
  * Clone o repositório:
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/TheLastJedi00/BorgesScheduleApi
 
  * Navegue até o diretório do projeto:
    cd seu-repositorio
@@ -85,6 +78,3 @@ Contribuições são o que tornam a comunidade de código aberto um lugar incrí
  * Faça o Commit de suas mudanças (git commit -m 'Add some AmazingFeature').
  * Faça o Push da Branch (git push origin feature/AmazingFeature).
  * Abra um Pull Request.
-📄 Licença
-Distribuído sob a licença MIT. Veja LICENSE para mais informações.
-
