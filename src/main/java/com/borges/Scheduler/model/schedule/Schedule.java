@@ -2,7 +2,7 @@ package com.borges.Scheduler.model.schedule;
 
 import com.borges.Scheduler.dto.schedule.SchedulingData;
 
-import com.borges.Scheduler.services.ServiceFeatures;
+import com.borges.Scheduler.services.ScheduleFeatures;
 import com.borges.Scheduler.services.WorkingDays;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -41,7 +41,7 @@ public class Schedule {
     public Schedule(SchedulingData data) {
         this.date = data.date();
         this.dayOfWeek = data.dayOfWeek();
-        this.endOfService = ServiceFeatures.calculateEndOfService(data.serviceCode(), data.date());
+        this.endOfService = ScheduleFeatures.calculateEndOfService(data.serviceCode(), data.date());
         this.name = data.name();
         this.phone = data.phone();
         this.service = data.service();
