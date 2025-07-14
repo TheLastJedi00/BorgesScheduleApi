@@ -1,4 +1,8 @@
 package com.borges.Scheduler.repository;
 
-public interface AdminRepository{
+import com.borges.Scheduler.model.admin.Admin;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AdminRepository extends JpaRepository<Admin, Long> {
+
 }

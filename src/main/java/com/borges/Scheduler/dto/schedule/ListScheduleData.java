@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public record ListScheduleData(
         LocalDateTime date,
         LocalDateTime endOfService,
-        WorkingDays weekDay,
+        WorkingDays dayOfWeek,
         String name,
         String phone,
         String service
