@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping("/agendamento")
 public class ScheduleController {
-
     @Autowired
     private ScheduleRepository repository;
     @Autowired
@@ -46,9 +45,8 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ListScheduleData>> getSchedule(@RequestParam(name="date", required = false) LocalDateTime date, @PageableDefault(sort = {"date"}) Pageable pageable) {
+    public ResponseEntity<Page<ListScheduleData>> getSchedule(@RequestParam(name = "date", required = false) LocalDateTime date, @PageableDefault(sort = {"date"}) Pageable pageable) {
         var page = this.scheduleFeatures.listScheduleByDate(date, pageable);
-
         return ResponseEntity.ok(page);
     }
 }
