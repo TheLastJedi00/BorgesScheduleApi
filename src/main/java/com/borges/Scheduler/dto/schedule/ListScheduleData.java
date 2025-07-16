@@ -1,7 +1,7 @@
 package com.borges.Scheduler.dto.schedule;
 
 import com.borges.Scheduler.model.schedule.Schedule;
-import com.borges.Scheduler.services.WorkingDays;
+import com.borges.Scheduler.infra.services.WorkingDays;
 
 import java.time.LocalDateTime;
 

@@ -2,8 +2,8 @@ package com.borges.Scheduler.model.schedule;
 
 import com.borges.Scheduler.dto.schedule.SchedulingData;
 
-import com.borges.Scheduler.services.ScheduleFeatures;
-import com.borges.Scheduler.services.WorkingDays;
+import com.borges.Scheduler.infra.services.ScheduleFeatures;
+import com.borges.Scheduler.infra.services.WorkingDays;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

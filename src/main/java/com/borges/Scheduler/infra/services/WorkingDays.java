@@ -1,4 +1,4 @@
-package com.borges.Scheduler.services;
+package com.borges.Scheduler.infra.services;
 
 public enum WorkingDays {
     SEGUNDA,

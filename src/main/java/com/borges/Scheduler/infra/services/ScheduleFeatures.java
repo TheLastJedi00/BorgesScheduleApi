@@ -1,4 +1,4 @@
-package com.borges.Scheduler.services;
+package com.borges.Scheduler.infra.services;
 
 import com.borges.Scheduler.dto.schedule.ListScheduleData;
 import com.borges.Scheduler.dto.schedule.SchedulingData;

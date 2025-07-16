@@ -5,7 +5,7 @@ import com.borges.Scheduler.dto.schedule.ScheduleDetail;
 import com.borges.Scheduler.dto.schedule.SchedulingData;
 import com.borges.Scheduler.model.schedule.Schedule;
 import com.borges.Scheduler.repository.ScheduleRepository;
-import com.borges.Scheduler.services.ScheduleFeatures;
+import com.borges.Scheduler.infra.services.ScheduleFeatures;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

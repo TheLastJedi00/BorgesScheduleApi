@@ -1,4 +1,4 @@
-package com.borges.Scheduler.security;
+package com.borges.Scheduler.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

@@ -1,4 +1,4 @@
-package com.borges.Scheduler.services;
+package com.borges.Scheduler.infra.services;
 
 import com.borges.Scheduler.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;

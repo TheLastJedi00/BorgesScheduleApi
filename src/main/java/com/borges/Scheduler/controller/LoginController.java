@@ -2,9 +2,8 @@ package com.borges.Scheduler.controller;
 
 import com.borges.Scheduler.dto.admin.AdminLogin;
 import com.borges.Scheduler.model.admin.Admin;
-import com.borges.Scheduler.repository.AdminRepository;
-import com.borges.Scheduler.security.TokenJWTData;
-import com.borges.Scheduler.security.TokenService;
+import com.borges.Scheduler.infra.security.TokenJWTData;
+import com.borges.Scheduler.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
