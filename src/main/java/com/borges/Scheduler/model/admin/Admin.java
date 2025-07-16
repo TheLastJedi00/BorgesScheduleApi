@@ -47,7 +47,7 @@ public class Admin implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return this.name;
     }
 
     @Override

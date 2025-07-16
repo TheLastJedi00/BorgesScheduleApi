@@ -2,7 +2,6 @@ package com.borges.Scheduler.controller;
 
 import com.borges.Scheduler.dto.admin.AdminData;
 import com.borges.Scheduler.dto.admin.AdminInfo;
-import com.borges.Scheduler.dto.admin.AdminLogin;
 import com.borges.Scheduler.model.admin.Admin;
 import com.borges.Scheduler.repository.AdminRepository;
 import jakarta.transaction.Transactional;
@@ -20,6 +19,7 @@ public class AdminController {
 
     @Autowired
     private AdminRepository repository;
+
 
     @PostMapping
     @Transactional
