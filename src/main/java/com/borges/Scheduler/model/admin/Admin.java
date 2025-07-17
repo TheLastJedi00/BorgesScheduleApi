@@ -37,7 +37,7 @@ public class Admin implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Admin implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.name;
+        return this.email;
     }
 
     @Override
