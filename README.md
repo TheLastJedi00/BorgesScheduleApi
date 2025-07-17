@@ -1,81 +1,125 @@
-📅 API de Agendamento
-📝 Descrição do Projeto
-Este projeto consiste em uma API RESTful desenvolvida em Java com Spring Boot, projetada para gerenciar agendamentos de serviços. A API oferece endpoints para administradores gerenciarem o negócio e para clientes realizarem e consultarem agendamentos.
-O sistema conta com uma lógica de negócios robusta para validar horários, evitar conflitos e garantir a integridade dos dados de agendamento.
-✨ Funcionalidades (Features)
- * ✅ Gerenciamento Administrativo: Endpoints seguros para o proprietário do negócio.
- * ✅ Agendamento de Clientes: Operações de CRUD para agendamentos (criar, ler, atualizar, deletar).
- * ✅ Validação de Horários: Lógica para evitar agendamentos conflitantes.
- * ✅ Lógica de Negócios Centralizada: Um serviço (ScheduleServices) dedicado a tratar as regras de agendamento, como duração do atendimento e comparação de horários.
-🛠️ Tecnologias Utilizadas
- * Linguagem: Java 17+
- * Framework: Spring Boot 3
- * Banco de Dados: MySQL
- * Build Tool: Maven
- * Segurança: Spring Security e JWT
-🏛️ Arquitetura
-A API está estruturada em controladores que separam as responsabilidades e um serviço que encapsula as regras de negócio complexas.
- * AdminController.java: Responsável por todos os endpoints relacionados à administração do sistema. As funcionalidades aqui presentes são destinadas ao dono do negócio.
- * SchedulerController.java: Responsável pelos endpoints públicos ou de cliente, focados na criação e consulta de agendamentos.
- * ScheduleServices.java: Uma classe de serviço que contém toda a lógica de negócio para os agendamentos. Suas responsabilidades incluem:
-   * Validar a disponibilidade de um horário.
-   * Prevenir agendamentos duplos ou conflitantes.
-   * Calcular e definir a duração de um atendimento.
-   * Processar e preparar os dados antes de salvá-los no banco de dados.
-🚀 Endpoints da API
-A seguir, uma descrição dos principais endpoints disponíveis.
+# Borges Scheduler API
+## API REST desenvolvida com Spring Boot para o gerenciamento de agendamentos. 
+### A aplicação conta com um sistema de autenticação de administradores baseado em JSON Web Tokens (JWT) para proteger endpoints específicos.
 
-Scheduler Controller (/api/schedules)
-| Método | Endpoint | Descrição |
-|---|---|---|
-| POST | / | Cria um novo agendamento. |
-| GET | / | Lista os horários disponíveis para um dia. |
-| DELETE | /{id} | Cancela um agendamento. |
-|---|---|---|
+## ✨ Funcionalidades
 
-Exemplo de corpo para POST /:
+### Autenticação: 
+* Autenticação de administradores com e-mail e senha, retornando um token JWT.
+### Gerenciamento de Administradores: 
+* Criação de novos administradores (requer autenticação).
+### Gerenciamento de Agendamentos:
+* Criação de novos agendamentos (endpoint público).
+* Listagem paginada de agendamentos (endpoint público).
+* Filtragem de agendamentos por data.
 
-{
-  "Date": "2024-10-28T10:00:00",
-  "WeekDay": "SEGUNDA",
-  "Name": "Nome Cliente",
-  "Phone": "11899990000",
-  "Service": "Tipo de Serviço",
-  "ServiceCode": "99"
-}
+## 🛠️ Tecnologias Utilizadas
+* Java 17+
+* Spring Boot 3
+* Spring Security: 
+Para controle de autenticação e autorização.
+* Spring Data JPA: 
+Para persistência de dados.
+* Auth0 Java JWT: 
+Para geração e validação de tokens.
+* Lombok: 
+Para reduzir código boilerplate em DTOs e entidades.
+* Maven: 
+Como gerenciador de dependências e build.
+* Banco de Dados: MySQL.
 
-Exemplo de resposta para GET / (horários disponíveis):
+## ⚙️ Pré-requisitos
+* JDK 17 ou superior.
+* Maven 3.8 ou superior.
+* Uma instância de banco de dados (ex: MySQL) ou Docker para rodá-la.
 
-[
-    "2024-10-28T09:00:00",
-    "2024-10-28T11:00:00",
-    "2024-10-28T14:00:00"
-]
+## 🏁 Como Executar o Projeto
+* Clone o repositório: ```git clone https://github.com/TheLastJedi00/BorgesScheduleApi```
+* ```cd my-scheduler-api```
+* Configure o ``application.properties``:
+* Abra o arquivo ``src/main/resources/application.properties`` e configure as variáveis de ambiente, principalmente a conexão com o banco de dados e o segredo do token JWT.
 
-📋 Pré-requisitos
-Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
- * JDK 17 ou superior
- * Maven
- * Um cliente de API, como Postman ou Insomnia.
+## Configuração do Banco de Dados (ex: MySQL)
+* `` spring.datasource.url=jdbc:mysql://localhost:3306/scheduler_db``
+* ``spring.datasource.username=seu-usuario``
+* ``spring.datasource.password=sua-senha``
 
-▶️ Como Executar
- * Clone o repositório:
-   git clone https://github.com/TheLastJedi00/BorgesScheduleApi
+### Configuração do Hibernate
+* ``spring.jpa.hibernate.ddl-auto=update``
 
- * Navegue até o diretório do projeto:
-   cd seu-repositorio
+### Segredo para a geração do token JWT
+* ``api.security.token.secret=${JWT_SECRET:meu-segredo-super-secreto}``
+* Compile o projeto com o Maven:mvn clean install
+* Execute a aplicação:mvn spring-boot:run
+* A API estará disponível em http://localhost:8080.
 
- * Instale as dependências com o Maven:
-   mvn clean install
+# 📖 Endpoints da API
+### A seguir estão os principais endpoints disponíveis na API.
 
- * Execute a aplicação:
-   mvn spring-boot:run
+## 🔑 Autenticação
 
-A API estará disponível em http://localhost:8080.
-🤝 Como Contribuir
-Contribuições são o que tornam a comunidade de código aberto um lugar incrível para aprender, inspirar e criar. Qualquer contribuição que você fizer será muito apreciada.
- * Faça um Fork do projeto.
- * Crie uma Branch para sua feature (git checkout -b feature/AmazingFeature).
- * Faça o Commit de suas mudanças (git commit -m 'Add some AmazingFeature').
- * Faça o Push da Branch (git push origin feature/AmazingFeature).
- * Abra um Pull Request.
+### POST /loginAutentica um administrador e retorna um token JWT para ser usado nas requisições protegidas.
+* Request Body: 
+``{
+"email": "admin@email.com",
+"password": "senha"
+}``
+* Success Response (200 OK):
+``{
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}``
+
+## 👤 Administradores
+### POST /admin
+* Cria um novo administrador no sistema.
+* Autenticação Requerida: Sim (ROLE_ADMIN)
+* Request Body:
+``{
+"name": "Novo Admin",
+"email": "novoadmin@email.com",
+"password": "senha"
+}``
+* Success Response (201 Created): 
+Retorna os detalhes do administrador criado.
+
+## 🗓️ Agendamentos
+### POST /agendamento
+* Cria um novo agendamento.
+* Autenticação Requerida: Não (Endpoint Público)
+* Request Body:
+``{
+"name": "Nome do Cliente",
+"phone": "11999998888",
+"date": "2025-07-20T14:30:00",
+"service": "Corte de Cabelo"
+}``
+* Success Response (201 Created): 
+Retorna os detalhes do agendamento criado.
+
+### GET /agendamento
+* Lista os agendamentos de forma paginada.
+* Autenticação Requerida: Não (Endpoint Público)
+* Query Parameters:
+  * date (opcional): Filtra agendamentos por uma data específica. Ex: ?date=2025-07-20T00:00:00
+  * page (opcional): Número da página (inicia em 0).
+  * size (opcional): Quantidade de itens por página.
+  * sort (opcional): Campo para ordenação. Ex: ?sort=date,asc
+* Success Response (200 OK): Retorna um objeto Page com a lista de agendamentos e informações de paginação.
+
+# 🏗️ Estrutura do Projeto
+O projeto segue uma arquitetura em camadas para organizar as responsabilidades:
+## controller: 
+* Responsável por expor os endpoints da API (a camada de entrada). 
+* Recebe as requisições HTTP, delega a lógica de negócio e formata as respostas.
+## model / entidades: 
+* Representa as entidades do domínio (Admin, Schedule) e o mapeamento para o banco de dados (JPA).
+## repository: 
+* Interfaces do Spring Data JPA que abstraem o acesso aos dados, fornecendo métodos para operações de CRUD.
+## infra: 
+* Camada de infraestrutura, contendo componentes que dão suporte à aplicação, mas não são a lógica de negócio principal.
+## security: 
+* Classes de configuração do Spring Security, o filtro de token e o serviço de geração/validação de JWT.
+## services: 
+* Classes de serviço que contêm a lógica de negócio mais complexa (ex: ScheduleFeatures).
+## dto (Data Transfer Objects): 
+* Objetos usados para modelar os dados que entram e saem da API, desacoplando a camada de controle da camada de modelo e garantindo que apenas os dados necessários sejam expostos.
