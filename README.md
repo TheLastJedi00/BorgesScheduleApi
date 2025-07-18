@@ -106,6 +106,32 @@ Retorna os detalhes do agendamento criado.
   * sort (opcional): Campo para ordenação. Ex: ?sort=date,asc
 * Success Response (200 OK): Retorna um objeto Page com a lista de agendamentos e informações de paginação.
 
+### PUT /agendamento
+* Atualiza as informações de um agendamento existente. 
+* Permite atualizações parciais (só é preciso enviar os campos que deseja alterar junto com o id).
+* Autenticação Requerida: Sim (Endpoint Privado)
+* Request Body:
+* JSON ``{
+"id": 1,
+"phone": "11912345678",
+"date": "2025-07-20T15:00:00"
+}•Success Response (200 OK): Retorna os detalhes completos do agendamento com as informações atualizadas.JSON{
+"id": 1,
+"name": "Nome do Cliente",
+"phone": "11912345678",
+"date": "2025-07-20T15:00:00",
+"service": "Corte de Cabelo",
+"endOfService": "2025-07-20T15:30:00",
+"dayOfWeek": "SUNDAY"
+}``
+### DELETE /agendamento/{id}
+* Realiza a exclusão lógica de um agendamento. 
+* O registro não é removido fisicamente do banco, mas é marcado como inválido e não aparecerá mais nas listagens.
+* Autenticação Requerida: Sim (Endpoint Privado)
+* URL Parameter:
+* * id (obrigatório): O ID do agendamento a ser excluído. Ex: /agendamento/1
+* Success Response (204 No Content): A resposta não contém corpo (body), indicando que a operação foi bem-sucedida.
+
 # 🏗️ Estrutura do Projeto
 O projeto segue uma arquitetura em camadas para organizar as responsabilidades:
 ## controller: 

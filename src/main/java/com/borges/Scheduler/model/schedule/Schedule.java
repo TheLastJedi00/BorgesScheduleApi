@@ -2,6 +2,7 @@ package com.borges.Scheduler.model.schedule;
 
 import com.borges.Scheduler.dto.schedule.SchedulingData;
 
+import com.borges.Scheduler.dto.schedule.SchedulingDataUpdate;
 import com.borges.Scheduler.infra.services.ScheduleFeatures;
 import com.borges.Scheduler.infra.services.WorkingDays;
 import jakarta.persistence.*;
@@ -9,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +21,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Where(clause = "ativo = true")
+@SQLDelete(sql = "UPDATE schedule SET ativo = false WHERE id = ?")
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,5 +51,28 @@ public class Schedule {
         this.phone = data.phone();
         this.service = data.service();
         this.serviceCode = data.serviceCode();
+    }
+
+    public void updateInfo(SchedulingDataUpdate data){
+        if(data.name() != null){
+            this.name = data.name();
+        }
+        if(data.phone() != null){
+            this.phone = data.phone();
+        }
+        if(data.service() != null){
+            this.service = data.service();
+        }
+        if(data.date() != null){
+            this.date = data.date();
+            this.endOfService = ScheduleFeatures.calculateEndOfService(this.serviceCode, data.date());
+        }
+        if(data.dayOfWeek() != null){
+            this.dayOfWeek = data.dayOfWeek();
+        }
+        if (data.date() != null || data.service() != null) {
+            this.dayOfWeek = data.dayOfWeek();
+            this.endOfService = ScheduleFeatures.calculateEndOfService(this.serviceCode, this.date);
+        }
     }
 }

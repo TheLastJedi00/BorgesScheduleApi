@@ -25,7 +25,6 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity login(@RequestBody @Valid AdminLogin admin) {
-
         var authenticationToken = new UsernamePasswordAuthenticationToken(admin.email(), admin.password());
         var authentication = manager.authenticate(authenticationToken);
         var tokenJWT = tokenService.tokenGenerator((Admin) authentication.getPrincipal());

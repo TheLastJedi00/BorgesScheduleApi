@@ -3,6 +3,7 @@ package com.borges.Scheduler.controller;
 import com.borges.Scheduler.dto.schedule.ListScheduleData;
 import com.borges.Scheduler.dto.schedule.ScheduleDetail;
 import com.borges.Scheduler.dto.schedule.SchedulingData;
+import com.borges.Scheduler.dto.schedule.SchedulingDataUpdate;
 import com.borges.Scheduler.model.schedule.Schedule;
 import com.borges.Scheduler.repository.ScheduleRepository;
 import com.borges.Scheduler.infra.services.ScheduleFeatures;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.time.LocalDateTime;
 
-@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/agendamento")
 public class ScheduleController {
@@ -48,5 +48,20 @@ public class ScheduleController {
     public ResponseEntity<Page<ListScheduleData>> getSchedule(@RequestParam(name = "date", required = false) LocalDateTime date, @PageableDefault(sort = {"date"}) Pageable pageable) {
         var page = this.scheduleFeatures.listScheduleByDate(date, pageable);
         return ResponseEntity.ok(page);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity putSchedule(@RequestBody @Valid SchedulingDataUpdate data){
+        var schedule = repository.getReferenceById(data.id());
+        schedule.updateInfo(data);
+        return ResponseEntity.ok(new ScheduleDetail(schedule));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteSchedule(@PathVariable Long id){
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
