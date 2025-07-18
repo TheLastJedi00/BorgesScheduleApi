@@ -58,7 +58,8 @@ Como gerenciador de dependências e build.
 
 ## 🔑 Autenticação
 
-### POST /loginAutentica um administrador e retorna um token JWT para ser usado nas requisições protegidas.
+### POST /login
+Autentica um administrador e retorna um token JWT para ser usado nas requisições protegidas.
 * Request Body: 
 ``{
 "email": "admin@email.com",
