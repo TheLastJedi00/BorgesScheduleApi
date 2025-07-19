@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class ScheduleFeatures {
+public class ScheduleService {
 
     @Autowired
     private ScheduleRepository scheduleRepository;

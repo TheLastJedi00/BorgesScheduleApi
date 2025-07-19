@@ -6,7 +6,7 @@ import com.borges.Scheduler.dto.schedule.SchedulingData;
 import com.borges.Scheduler.dto.schedule.SchedulingDataUpdate;
 import com.borges.Scheduler.model.schedule.Schedule;
 import com.borges.Scheduler.repository.ScheduleRepository;
-import com.borges.Scheduler.infra.services.ScheduleFeatures;
+import com.borges.Scheduler.infra.services.ScheduleService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +25,10 @@ public class ScheduleController {
     @Autowired
     private ScheduleRepository repository;
     @Autowired
-    private ScheduleFeatures scheduleFeatures;
+    private ScheduleService scheduleFeatures;
 
     @Autowired
-    public ScheduleController(ScheduleFeatures scheduleFeatures) {
+    public ScheduleController(ScheduleService scheduleFeatures) {
         this.scheduleFeatures = scheduleFeatures;
     }
 
