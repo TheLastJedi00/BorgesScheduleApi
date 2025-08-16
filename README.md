@@ -1,4 +1,4 @@
-# Borges Schedule API
+# Schedule API by Borges
 ## API REST desenvolvida com Spring Boot para o gerenciamento de agendamentos. 
 ### A aplicação conta com um sistema de autenticação de administradores baseado em JSON Web Tokens (JWT) para proteger endpoints específicos.
 
