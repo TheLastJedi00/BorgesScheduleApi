@@ -107,4 +107,10 @@ public class ScheduleService {
         return scheduleRepository.findByDateBetween(startOfDay, endOfDay, pageable);
     }
 
+    public Page<ListScheduleData> listSchedulesOfWeek(LocalDateTime monday, LocalDateTime endOfWeek, Pageable pageable){
+        LocalDateTime startOfWeek = monday.toLocalDate().atStartOfDay();
+
+        return scheduleRepository.findByDateBetween(startOfWeek, endOfWeek, pageable);
+    }
+
 }

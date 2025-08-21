@@ -45,14 +45,22 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ListScheduleData>> getSchedule(@RequestParam(name = "date", required = false) LocalDateTime date, @PageableDefault(sort = {"date"}) Pageable pageable) {
-        var page = this.scheduleFeatures.listScheduleByDate(date, pageable);
-        return ResponseEntity.ok(page);
+    public ResponseEntity<Page<ListScheduleData>> getSchedule(
+            @RequestParam(name = "date", required = false) LocalDateTime date,
+            @RequestParam(name = "saturday", required = false) LocalDateTime saturday,
+            @PageableDefault(sort = {"date"}, size = 23) Pageable pageable) {
+
+        if(saturday == null) {
+            var pageDay = this.scheduleFeatures.listScheduleByDate(date, pageable);
+            return ResponseEntity.ok(pageDay);
+        }
+        var pageWeek = this.scheduleFeatures.listSchedulesOfWeek(date, saturday, pageable);
+        return ResponseEntity.ok(pageWeek);
     }
 
     @PutMapping
     @Transactional
-    public ResponseEntity putSchedule(@RequestBody @Valid SchedulingDataUpdate data){
+    public ResponseEntity putSchedule(@RequestBody @Valid SchedulingDataUpdate data) {
         var schedule = repository.getReferenceById(data.id());
         schedule.updateInfo(data);
         return ResponseEntity.ok(new ScheduleDetail(schedule));
@@ -60,7 +68,7 @@ public class ScheduleController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity deleteSchedule(@PathVariable Long id){
+    public ResponseEntity deleteSchedule(@PathVariable Long id) {
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
