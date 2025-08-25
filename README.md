@@ -99,38 +99,47 @@ Retorna os detalhes do agendamento criado.
 
 ### GET /agendamento
 * Lista os agendamentos de forma paginada.
+* Pode listar os agendamentos de um dia específico ou de uma semana.
 * Autenticação Requerida: Não (Endpoint Público)
 * Query Parameters:
-  * date (opcional): Filtra agendamentos por uma data específica. Ex: ?date=2025-07-20T00:00:00
-  * page (opcional): Número da página (inicia em 0).
-  * size (opcional): Quantidade de itens por página.
-  * sort (opcional): Campo para ordenação. Ex: ?sort=date,asc
-* Success Response (200 OK): Retorna um objeto Page com a lista de agendamentos e informações de paginação.
+  * `date` (opcional): Filtra agendamentos por uma data específica (retorna agendamentos do dia inteiro). Se usado com `saturday`, representa o início do período. Ex: `?date=2025-07-20T00:00:00`
+  * `saturday` (opcional): Se informado junto com `date`, filtra os agendamentos em um intervalo de datas, onde `date` é o início e `saturday` é o fim. Ex: `?date=2025-07-20T00:00:00&saturday=2025-07-26T23:59:59`
+  * `page` (opcional): Número da página (inicia em 0).
+  * `size` (opcional): Quantidade de itens por página.
+  * `sort` (opcional): Campo para ordenação. Ex: `?sort=date,asc`
+* Success Response (200 OK): Retorna um objeto `Page` com a lista de agendamentos e informações de paginação.
 
 ### PUT /agendamento
-* Atualiza as informações de um agendamento existente. 
-* Permite atualizações parciais (só é preciso enviar os campos que deseja alterar junto com o id).
+* Atualiza as informações de um agendamento existente.
+* Permite atualizações parciais (só é preciso enviar os campos que deseja alterar junto com o `id`).
 * Autenticação Requerida: Sim (Endpoint Privado)
 * Request Body:
-* JSON ``{
-"id": 1,
-"phone": "11912345678",
-"date": "2025-07-20T15:00:00"
-}•Success Response (200 OK): Retorna os detalhes completos do agendamento com as informações atualizadas.JSON{
-"id": 1,
-"name": "Nome do Cliente",
-"phone": "11912345678",
-"date": "2025-07-20T15:00:00",
-"service": "Corte de Cabelo",
-"endOfService": "2025-07-20T15:30:00",
-"dayOfWeek": "SUNDAY"
-}``
+```json
+{
+  "id": 1,
+  "phone": "11912345678",
+  "date": "2025-07-20T15:00:00"
+}
+```
+* Success Response (200 OK): Retorna os detalhes completos do agendamento com as informações atualizadas.
+```json
+{
+  "id": 1,
+  "name": "Nome do Cliente",
+  "phone": "11912345678",
+  "date": "2025-07-20T15:00:00",
+  "service": "Corte de Cabelo",
+  "endOfService": "2025-07-20T15:30:00",
+  "dayOfWeek": "SUNDAY"
+}
+```
+
 ### DELETE /agendamento/{id}
-* Realiza a exclusão lógica de um agendamento. 
-* O registro não é removido fisicamente do banco, mas é marcado como inválido e não aparecerá mais nas listagens.
+* Realiza a exclusão física de um agendamento.
+* O registro é permanentemente removido do banco de dados.
 * Autenticação Requerida: Sim (Endpoint Privado)
 * URL Parameter:
-* * id (obrigatório): O ID do agendamento a ser excluído. Ex: /agendamento/1
+  * `id` (obrigatório): O ID do agendamento a ser excluído. Ex: `/agendamento/1`
 * Success Response (204 No Content): A resposta não contém corpo (body), indicando que a operação foi bem-sucedida.
 
 # 🏗️ Estrutura do Projeto
