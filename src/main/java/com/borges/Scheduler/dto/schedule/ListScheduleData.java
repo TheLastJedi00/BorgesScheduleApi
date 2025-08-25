@@ -6,6 +6,7 @@ import com.borges.Scheduler.infra.services.WorkingDays;
 import java.time.LocalDateTime;
 
 public record ListScheduleData(
+        Long id,
         LocalDateTime date,
         LocalDateTime endOfService,
         WorkingDays dayOfWeek,
@@ -14,6 +15,6 @@ public record ListScheduleData(
         String service
 ) {
     public ListScheduleData (Schedule schedule) {
-        this(schedule.getDate(), schedule.getEndOfService(), schedule.getDayOfWeek(), schedule.getName(), schedule.getPhone(), schedule.getService());
+        this(schedule.getId(), schedule.getDate(), schedule.getEndOfService(), schedule.getDayOfWeek(), schedule.getName(), schedule.getPhone(), schedule.getService());
     }
 }
